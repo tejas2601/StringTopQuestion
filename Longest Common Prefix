@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class Main {
+    public static String longestCommonPrefix(String s[]) {
+        Arrays.sort(s);
+        System.out.println(Arrays.toString(s));
+        String first = s[0];
+        String last = s[s.length - 1]; 
+        int min = Math.min(first.length(), last.length()); 
+
+        int i = 0;
+        while (i < min) {
+            boolean flag = false; 
+            for (int j = 1; j < s.length; j++) { 
+                int p = s[j].length(); 
+                if (!s[j].substring(0, i + 1).equals(first.substring(0, i + 1))) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag) break;
+            i++;
+        }
+
+        return first.substring(0, i);
+    }
+
+    public static void main(String[] args) {
+        String[] arr = { "apple", "ape", "april"};
+        System.out.println("Longest Common Prefix: " + longestCommonPrefix(arr));
+    }
+}
