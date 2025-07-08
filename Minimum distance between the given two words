@@ -1,0 +1,30 @@
+
+import java.util.*;
+public class Main
+{
+    public static int shortestDistance(String s[],String w,String w1){
+        int d1=-1;
+        int d2=-1;
+         int ans = Integer.MAX_VALUE;
+        for(int i=0;i<s.length;i++){
+            if(s[i].equals(w)){
+                d1=i;
+            }
+            if(s[i].equals(w1)){
+                d2=i;
+            }
+            if(d1!=0&&d2!=0){
+                ans=Math.min(ans,Math.abs(d1-d2));
+            }
+        }
+        return ans;
+    }
+	public static void main(String[] args) {
+// 	Scanner sc = new Scanner(System.in);
+	String s[]={"geeks", "for", "geeks", "contribute",  "practice"};
+	String  word1 = "geeks";
+	String word2 = "practice";
+	System.out.println(shortestDistance(s,word1,word2));
+	
+	}
+}
