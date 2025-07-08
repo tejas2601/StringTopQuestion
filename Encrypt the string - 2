@@ -1,0 +1,36 @@
+import java.util.*;
+
+public class Main {
+    public static String hexadecimalconversion(int a) {
+        String res = "";
+        char c[] = {'a', 'b', 'c', 'd', 'e', 'f'};
+        while (a != 0) {
+            int rem = a % 16;
+            if (rem < 10) {
+                res = rem + res;
+            } else {
+                res = c[rem - 10] + res;
+            }
+            a /= 16;
+        }
+        return res.equals("") ? "0" : res;
+    }
+
+    public static void main(String[] args) {
+        String s1 = "abc";
+        HashSet<Character> kk = new HashSet<Character>();
+        HashMap<Character, Integer> fre = new HashMap<>();
+
+        for (char ch : s1.toCharArray()) {
+            kk.add(ch);
+            fre.put(ch, fre.getOrDefault(ch, 0) + 1);
+        }
+
+        String result = "";
+        for (char ch : kk) {
+            result = hexadecimalconversion(fre.get(ch))+ch + result;
+        }
+
+        System.out.println(result);
+    }
+}
