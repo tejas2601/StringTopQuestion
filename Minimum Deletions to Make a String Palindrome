@@ -1,0 +1,63 @@
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Arrays;
+class Main{
+   public static int minDeletions(String s){
+       int i=0;
+       int j=s.length()-1;
+       int count=0;
+       while(i<j){
+           if(s.charAt(i)!=s.charAt(j)){
+               count+=2;
+           }
+           i++;
+           j--;
+       }
+       return count;
+       
+   }
+   public static int minDeletions1(String s,int i,int j){
+        if(i>=j){
+               return 0;
+        }
+          
+          if(s.charAt(i)==s.charAt(j)){
+              return minDeletions1(s,i+1,j-1);
+          }
+          System.out.println(1);
+          
+          return 1 + Math.min(minDeletions1(s,i+1,j),minDeletions1(s,i,j-1));
+   }
+   public static int memoization(int i,int j,String s,int m[][]){
+       if(i>=j){
+               return 0;
+        }
+        
+         if (m[i][j] != -1) return m[i][j];
+         if (s.charAt(i) == s.charAt(j)) {
+            m[i][j] = memoization(i + 1, j - 1, s, m);
+        } else {
+            
+           
+            m[i][j] = 1 + Math.min(memoization(i + 1, j, s, m),
+                                      memoization(i, j - 1, s, m));
+        }
+
+        return m[i][j];
+   }
+        
+     public static void main(String[] args) {
+        String s = "aebcbda";
+       int n=s.length()-1;
+        System.out.println(minDeletions(s));
+        System.out.println(minDeletions1(s,0,n));
+        
+        int m[][]=new int[n+1][n+1];
+        for(int i=0;i<n;i++){
+            Arrays.fill(m,-1);
+        }
+        memoization(0,n,s,m);
+    }
+}
+
+
