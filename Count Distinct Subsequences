@@ -1,0 +1,43 @@
+
+import java.util.*;
+public class Main
+{
+    
+    public static int distinctSubseq(String s){
+        int count=1;
+        HashSet<String>kk=new HashSet<>();
+        for(int i=0;i<s.length()-1;i++){
+            kk.add(String.valueOf(s.charAt(i)));
+            for(int j=i+1;j<s.length();j++){
+               String ss ="";
+              ss=String.valueOf(s.charAt(i))+ String.valueOf(s.charAt(j));
+                kk.add(ss);
+            }
+        }
+        System.out.println(kk);
+        int cou=kk.size()+2;
+        return cou;
+    }
+    
+    public static void findsequance(int ind, StringBuilder cur, String str, HashSet<String> s){
+        int n=str.length();
+        if(ind==n){
+            s.add(cur.toString());
+            return;
+        }
+        findsequance(ind+1,cur,str,s);
+        cur.append(str.charAt(ind));
+        findsequance(ind+1,cur,str,s);
+        cur.deleteCharAt(cur.length()-1);
+    }
+	public static void main(String[] args) {
+     Scanner sc = new Scanner(System.in);
+        String str = "ggg";
+        System.out.println(distinctSubseq(str));
+        StringBuilder s = new StringBuilder();
+        HashSet<String>ss= new HashSet<>();
+        findsequance(0,s,str,ss);
+        System.out.println(ss.size());
+    }
+}
+	
