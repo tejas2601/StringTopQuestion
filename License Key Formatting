@@ -1,0 +1,47 @@
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+
+        String s = "2-5g-3-J";
+        int K = 2;
+
+        String ss = findString(s);  // cleaned string
+        String formatted = findS(ss, K);  // grouped result
+
+        System.out.println(formatted);  // final output
+    }
+
+    public static int findLength(String s) {
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != '-') {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static String findString(String s) {
+        String result = "";
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != '-') {
+                result += Character.toUpperCase(s.charAt(i));
+            }
+        }
+        return result;
+    }
+
+    public static String findS(String s, int k) {
+        int count = 0;
+        String result = "";
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (count == k) {
+                result = "-" + result;
+                count = 0;
+            }
+            result = s.charAt(i) + result;
+            count++;
+        }
+        return result;
+    }
+}
