@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class Main {
+
+    public static void replaceSubstr(String s, String s1, String s2) {
+        int l = s1.length();
+        int l1 = s.length();
+
+        StringBuilder kk = new StringBuilder();
+        int i = 0;
+
+        while (i < l1) {
+            if (i + l <= l1 && s.substring(i, i + l).equals(s1)) {
+                kk.append(s2);
+                i += l;
+            } else {
+                kk.append(s.charAt(i));
+                i++;
+            }
+        }
+
+        System.out.println(kk.toString());
+    }
+
+    public static void main(String[] args) {
+        String s = "abababa", s1 = "aba", s2 = "a";
+        replaceSubstr(s, s1, s2); // Expected output: "ababa" → after replacing 1st and last "aba"
+    }
+}
