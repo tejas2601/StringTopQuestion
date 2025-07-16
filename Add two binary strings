@@ -1,0 +1,89 @@
+import java.util.*;
+
+public class Main {
+    public static String addBinary(String s1, String s2) {
+        int carry = 0;
+        String s = "";
+
+        int maxlength = s1.length() < s2.length() ? s1.length() : s2.length();
+        int min = s1.length() > s2.length() ? s1.length() : s2.length();
+
+        int i = s1.length() - 1, j = s2.length() - 1;
+
+        while (maxlength >= 0) {
+            if (i >= 0 && j >= 0) {
+                if (s1.charAt(i) == '1' && s2.charAt(j) == '1') {
+                    if (carry == 1) {
+                        s = '1' + s;
+                        carry = 1;
+                    } else {
+                        s = '0' + s;
+                        carry = 1;
+                    }
+                } else if (s1.charAt(i) == '0' && s2.charAt(j) == '0') {
+                    if (carry == 0) {
+                        s = '0' + s;
+                        carry = 0;
+                    } else {
+                        s = '1' + s;
+                        carry = 0;
+                    }
+                } else {
+                    if (carry == 0) {
+                        s = '1' + s;
+                        carry = 0;
+                    } else {
+                        s = '0' + s;
+                        carry = 1;
+                    }
+                }
+                i--;
+                j--;
+            }
+            maxlength--;
+        }
+
+
+        while (i >= 0) {
+            if (carry == 0) {
+                s = s1.charAt(i) + s;
+            } else {
+                if (s1.charAt(i) == '1') {
+                    s = '0' + s;
+                    carry = 1;
+                } else {
+                    s = '1' + s;
+                    carry = 0;
+                }
+            }
+            i--;
+        }
+
+        while (j >= 0) {
+            if (carry == 0) {
+                s = s2.charAt(j) + s;
+            } else {
+                if (s2.charAt(j) == '1') {
+                    s = '0' + s;
+                    carry = 1;
+                } else {
+                    s = '1' + s;
+                    carry = 0;
+                }
+            }
+            j--;
+        }
+
+        if (carry == 1) {
+            s = '1' + s;
+        }
+
+        return s;
+    }
+
+    public static void main(String[] args) {
+        String s1 = "1101";
+        String s2 = "111";
+        System.out.println(addBinary(s1, s2)); 
+    }
+}
