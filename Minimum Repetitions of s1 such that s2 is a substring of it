@@ -1,0 +1,33 @@
+
+import java.util.*;
+public class Main
+{
+    public static int minRepeats(String s1,String s2){
+        if(s1.length()>s2.length()){
+            if(s1.contains(s2)){
+                return 0;
+            }else{
+                  return -1;
+            }
+        }
+        int count=0;
+        int j=s1.length();
+        int i=s2.length();
+        while(j<=i){
+           if(s1.contains(s2)){
+               return ++count;
+           }
+           s1+=s1;
+           j=s1.length();
+           count++;
+        }
+        if(s1.contains(s2)){
+               return ++count;
+           }
+      return -1;
+    }
+	public static void main(String[] args) {
+	        String s1 = "ab", s2 = "cab" ;
+        System.out.println(minRepeats(s1, s2));
+	}
+}
